@@ -8,20 +8,18 @@ public class CreateStudentValidator : AbstractValidator<CreateStudentDto>
     public CreateStudentValidator()
     {
         RuleFor(p => p.FirstName)
-            .MinimumLength(50).WithMessage("Öğrenci adı en az 3 karakter olabilir.");
+            .MinimumLength(3).WithMessage("Öğrenci adı en az 3 karakter olabilir.");
         RuleFor(p => p.LastName)
-            .MinimumLength(50).WithMessage("Öğrenci soyadı en az 3 karakter olabilir.");
+            .MinimumLength(3).WithMessage("Öğrenci soyadı en az 3 karakter olabilir.");
         RuleFor(p => p.PhoneNumber)
             .Matches(@"^\+?[0-9]{10,15}$").WithMessage("Öğrenci telefon numarası geçerli bir formatta olmalıdır.");
         RuleFor(p => p.Email)
             .EmailAddress()
             .WithMessage("Öğrenci e-posta adresi geçerli bir formatta olmalıdır.");
         RuleFor(p => p.IdentityNumber)
-            .EmailAddress()
-            .WithMessage("Öğrenci kimlik numarası geçerli bir formatta olmalıdır.")
             .Must(IsValidTckn).WithMessage("Öğrenci kimlik numarası geçerli bir TCKN formatında olmalıdır.");
     }
-}
+
 
 
     public static bool IsValidTckn(string? tckn)
@@ -63,3 +61,4 @@ public class CreateStudentValidator : AbstractValidator<CreateStudentDto>
 
         return true;
     }
+}
